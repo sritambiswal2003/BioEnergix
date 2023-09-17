@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super User</title>
+    <link rel="icon" href="logoo.png">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+    href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+</head>
+<body class="register-body">
+
+    <nav>
+        <img src="logoo.png" class="logo" alt="Logo" title="BioEnergiX">
+        
+        <ul class="navbar">
+            <li>
+                <a href="./index.html">Home</a>
+                <a href="./index.html#fwmanage">What We Do</a>
+                <a href="./register.html">Get Involved</a>
+                <a href="./about.html">About Us</a>
+                <a href="./contact.html">Contact Us</a>
+            </li>
+        </ul>
+    </nav>
+
+    <section class="registration">
+        <div class="register-form">
+            <h1>Super <span>User</span></h1>
+            <p>Make sure you input correct meter reading</p> <br>
+            <form action="" onsubmit="return validateform()">
+
+            <input type="text" name="myname1" placeholder="Biogas ID" id="name" required>
+            <input type="tel" name="myphone" placeholder="Your wallet address" id="phonenum" required>
+            <br>
+            <button type="button" id="openImageButton" onclick="openImage()">Open Image</button>
+            <br><br>
+            <button type="button" id="captureImageButton" onclick="captureImage()">Capture Image</button>
+            <br><br>
+            <input type="text" id="manual-reading" placeholder="Enter manual reading" />
+            <button type="button" id="recordManualReadingButton" onclick="recordManualReading()">Record Manual Reading</button>
+            
+            <br> <br>
+            <input type="submit" value="Submit" class="submitbtn">
+        </div>
+  <script>
+    // Function to open an image
+    function openImage() {
+      // Create a new file input element
+      var fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.accept = 'image/*';
+
+      // Listen for the change event on the file input element
+      fileInput.addEventListener('change', function() {
+        // Get the selected file
+        var file = fileInput.files[0];
+
+        // Create a new FileReader object
+        var reader = new FileReader();
+
+        // Read the selected file as a data URL
+        reader.onload = function() {
+          // Set the image preview src attribute to the data URL
+          document.getElementById('image').src = reader.result;
+        };
+
+        // Start reading the file
+        reader.readAsDataURL(file);
+      });
+
+      // Click the file input element
+      fileInput.click();
+    }
+
+    // Function to capture an image from the webcam
+    function captureImage() {
+      // Get the webcam video element
+      var video = document.querySelector('video');
+
+      // Create a new canvas element
+      var canvas = document.createElement('canvas');
+      canvas.width = video.width;
+      canvas.height = video.height;
+
+      // Get the canvas context
+      var context = canvas.getContext('2d');
+
+      // Draw the video frame to the canvas
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      // Get the image data from the canvas
+      var imageData = canvas.toDataURL('image/png');
+
+      // Set the image preview src attribute to the image data
+      document.getElementById('image').src = imageData;
+    }
+
+    // Function to record the manual reading for biogas
+    function recordManualReading() {
+      // Get the manual reading from the input field
+      var manualReading = document.getElementById('manual-reading').value;
+
+      // Save the manual reading to a database or other storage location
+
+      // Clear the manual reading input field
+      document.getElementById('manual-reading').value = '';
+    }
+  </script>
+
+    </section>
+
+<!-- Footer -->
+
+<section class="footer">
+    <div class="foot">
+        <div class="footer-content">
+            
+            <div class="footlinks">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="./register.html">Donate</a></li>
+                    <li><a href="./about.html">About Us</a></li>
+                    <li><a href="./contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class="footlinks">
+                <h4>Connect</h4>
+                <div class="social">
+                    <a href="" target="_blank"><i class='bx bxl-facebook'></i></a>
+                    <a href="" target="_blank"><i class='bx bxl-instagram' ></i></a>
+                    <a href="" target="_blank"><i class='bx bxl-twitter' ></i></a>
+                    <a href="" target="_blank"><i class='bx bxl-linkedin' ></i></a>
+                    <a href="" target="_blank"><i class='bx bxl-youtube' ></i></a>
+                    <a href="" target="_blank"><i class='bx bxl-wordpress' ></i></a>
+                    <a href="" target="_blank"><i class='bx bxl-github'></i></a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="end">
+        <p> Copyright © 2023 EchoEats | All Rights Reserved.</p>
+    </div>
+</section>
+
+<!-- Javascript -->
+<script>
+    function validateform(){ 
+        var tel=document.getElementById("phonenum").value;  
+
+        if(tel.length<10){  
+            alert("Phone number must be of atleast 10 digits!");  
+            return false;  
+        } else if(isNaN(tel)){
+            alert("Phone number should not include character!");
+            return false;
+        }
+        return true;
+}  
+</script>
+
+</body>
+</html>
